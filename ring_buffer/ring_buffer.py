@@ -9,66 +9,42 @@ class RingBuffer:
 
 
     def append(self, item):
+        # Before the buffer's full, add new elements at the end, and keep track of the most recent addition.
         if self.storage.length < self.capacity:
             self.storage.add_to_tail(item)
             self.current = self.storage.tail
-        elif self.storage.length == self.capacity and self.current == self.storage.tail:
+            print(item, self.current.value)
+        # but if full & most recent item's the tail, remove the oldest item (head) and head is the newest item
+        elif (self.storage.length >= self.capacity) and self.current.next is None:
+            print(self.current.value)
             self.storage.remove_from_head()
             self.storage.add_to_head(item)
             self.current = self.storage.head
+        # but if buffer's full and oldest item is NOT the tail, delete the oldest, replace it with new item, and now it's the newest item
         elif self.storage.length >= self.capacity:
             #Something's wrong with the below couple of lines...look at my test printouts
             self.storage.delete(self.current.next)
             self.current.insert_after(item)
+            self.storage.length += 1
             self.current = self.current.next
+            #VV head.value is breaking at value 20....why?
+            print("Current val:", self.current.value, self.storage.head.value)
 
 
     def get(self):
         # Note:  This is the only [] allowed
         list_buffer_contents = []
         temp = self.storage.head
-        while temp.next is not None:
+        # print(temp.value)
+        if temp is not None:
+            while temp.next is not None:
+                list_buffer_contents.append(temp.value)
+                temp = temp.next
             list_buffer_contents.append(temp.value)
-            temp = temp.next
-        list_buffer_contents.append(temp.value)
 
         return list_buffer_contents
 
 
-
-
-
-
-
-
-
-    # def append(self, item):
-        # x = self.storage.head
-        # while x is not None:
-        #     print(self.storage.length, x.value)
-        #     x = x.next
-    #     if self.storage.length < self.capacity:
-    #         self.storage.add_to_head(item)
-    #         if self.current is None:
-    #             self.current = self.storage.head
-    #     else:
-    #         temp = self.storage.head
-    #         while temp.value != self.current.value:
-    #             temp = temp.next
-    #         self.current = self.current.prev
-    #         self.storage.delete(temp.next)
-    #         temp.insert_after(item)
-
-    # def get(self):
-    #     # Note:  This is the only [] allowed
-    #     list_buffer_contents = []
-    #     temp = self.storage.tail
-    #     while temp.prev is not None:
-    #         list_buffer_contents.append(temp.value)
-    #         temp = temp.prev
-    #     list_buffer_contents.append(temp.value)
-
-    #     return list_buffer_contents
 
 # ----------------Stretch Goal-------------------
 

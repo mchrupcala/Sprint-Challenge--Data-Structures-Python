@@ -37,3 +37,25 @@ print (f"runtime: {end_time - start_time} seconds")
 # Python has built-in tools that allow for a very efficient approach to this problem
 # What's the best time you can accomplish with no restrictions on techniques or data
 # structures?
+
+# names_1.sort()
+# names_2.sort()
+
+# newtree = BinarySearchTree(names_1[0])
+# tree = BinarySearchTree(names_1[0])
+# for x in names_1[1:]:
+#     print(x)
+#     tree.insert(x)
+
+
+
+# duplicates = []
+# for name_2 in names_2:
+#     if tree.contains(name_2):
+#         duplicates.append(name_2)
+
+# print(duplicates)
+
+# end_time = time.time()
+# print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+# print (f"runtime: {end_time - start_time} seconds")

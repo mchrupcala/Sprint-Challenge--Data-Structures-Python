@@ -14,6 +14,7 @@ class ListNode:
     def insert_after(self, value):
         current_next = self.next
         self.next = ListNode(value, self, current_next)
+        # self.length += 1
         if current_next:
             current_next.prev = self.next
 
